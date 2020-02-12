@@ -13,6 +13,34 @@ const config = {
     measurementId: "G-49KKH4EZSP"
 };
 
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+    if (!userAuth) return;
+
+    const userRef = firestore.doc(`users/${userAuth.uid}`);
+    const snapShot = await userRef.get();
+    
+    // Below line checks to see if snapSHot is FALSE(user does not have existing data in our db). If FALSE then it creates a user in our DB with the specified fields of data.
+
+    if(!snapShot.exists) {
+        const { displayName, email } = userAuth;
+        const createdAt = new Date();
+
+        // Try-Catch is a way to write ASYNC JS synchronously. 
+        try {
+            await userRef.set({
+                displayName,
+                email,
+                createdAt,
+                ...additionalData
+            })
+        } catch (error) {
+            console.log('error creating user', error.message)
+        }
+    }
+
+    return userRef;
+};
+
 firebase.initializeApp(config);
 
 export const auth = firebase.auth();
