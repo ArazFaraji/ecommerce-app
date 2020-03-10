@@ -8,7 +8,12 @@ import logger from 'redux-logger';
 import rootReducer from './root-reducer';
 
 // The middlewares that the store is expecting from redux is an array. 
-const middlewares = [logger];
+const middlewares = [];
+
+// By removing logger from inside the brackets of middleware variable, now it only logs when the application is in development mode.
+if (process.env.NODE_ENV === 'development') {
+    middlewares.push(logger)
+};
 
 // making the store below. applyMiddleware is a return value and we are spreading in our middlewares inside of applyMiddleware. This spreads in all the values in the middlewares array above into the function call as individual arguements. This way if we need to add more things to the middleware we can just add it to the array value uptop. This is a scalable way to set up the store for future potential needs. 
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
