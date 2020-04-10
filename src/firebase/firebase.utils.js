@@ -43,6 +43,42 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
 firebase.initializeApp(config);
 
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey);
+    console.log(collectionRef);
+
+    const batch = firestore.batch();
+    objectsToAdd.forEach(obj => {
+        const newDocRef = collectionRef.doc();
+        // console.log(newDocRef)
+        batch.set(newDocRef, obj);
+    });
+
+    return await batch.commit()
+};
+
+export const convertCollectionsSnapshotToMap = collections => {
+    const transformedCollection = collections.docs.map(doc => {
+        const { title, items } = doc.data();
+
+        return {
+            // encodeURI lets you pass it a string and it gives back a string where any characters that a URL cannot handle/process are converted into a version that the URL can read
+            routeName: encodeURI(title.toLowerCase()),
+            id: doc.id,
+            title, 
+            items
+        };
+    });
+    console.log(transformedCollection);
+    
+    // We pass in initial object {}, goes through and sets the title of each collection as a key and they equal their respective collection object. 
+    return transformedCollection.reduce((accumulator, collection) => {
+        accumulator[collection.title.toLowerCase()] = collection;
+        return accumulator;
+    }, {});
+};
+
+
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 

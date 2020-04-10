@@ -1,11 +1,25 @@
 import React from 'react';
 import Directory from '../../components/directory/directory.component';
-import './homepage.styles.scss';
+// import './homepage.styles.scss';
+import { HomePageContainer } from './homepage.styles'
+
 
 const HomePage = () => (
-    <div className='homepage'>
+    <HomePageContainer>
         <Directory />
-    </div>
+    </HomePageContainer>
 );
+
+
+
+
+
+// Changing application to use styled-components instead of SCSS so that they are truly individual components and their styles don't bleed to other components. 
+
+// const HomePage = () => (
+//     <div className='homepage'>
+//         <Directory />
+//     </div>
+// );
 
 export default HomePage;

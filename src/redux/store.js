@@ -10,7 +10,7 @@ import rootReducer from './root-reducer';
 // The middlewares that the store is expecting from redux is an array. 
 const middlewares = [];
 
-// By removing logger from inside the brackets of middleware variable, now it only logs when the application is in development mode.
+// By removing logger from inside the brackets of middleware variable, now it only logs when the application is in development mode by pushing logger with a conditional.
 if (process.env.NODE_ENV === 'development') {
     middlewares.push(logger)
 };
