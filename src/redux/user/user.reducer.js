@@ -1,4 +1,4 @@
-import { UserActionTypes } from './user.types'
+import UserActionTypes from './user.types'
 // A reducer is a function that gets two properties, it gets a state object which represents the previous state, and then it receives an action. That action is an object with two properties -- a type: 'string' to tell the reducer what specific action is coming through and the action may/may not have a Payload as well. 
 // The state property of the reducer is what the redux store is going to pass to this reducer as the current state when the action gets fired. 
 // Needs a initial state value 
@@ -12,11 +12,26 @@ const userReducer = (state = INITIAL_STATE, action) => {
     // switch statement. Case statement and default value. Based on action.type value (a string) if the case of that action type is what we want, then we render something (the : after case) otherwise by default we just return the state.
     // EVERY SINGLE REDUCER GETS EVERY ACTION FIRED even if not related to this reducer. That is why we use case and default. 
     switch (action.type) {
-        case UserActionTypes.SET_CURRENT_USER:
+        // both cases will get resolved to the return statement below them. 
+        case UserActionTypes.SIGN_IN_SUCCESS:
             return {
                 ...state, 
-                currentUser: action.payload
-            }
+                currentUser: action.payload,
+                error: null
+            };
+        case UserActionTypes.SIGN_OUT_SUCCESS:
+            return { 
+                ...state,
+                currentUser: null,
+                error: null
+            };
+        case UserActionTypes.SIGN_IN_FAILURE:
+        case UserActionTypes.SIGN_OUT_FAILURE:
+        case UserActionTypes.SIGN_UP_FAILURE:
+            return {
+                ...state,
+                error: action.payload
+            };
         default:
             return state;
     }
