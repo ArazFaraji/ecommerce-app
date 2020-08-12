@@ -18,5 +18,5 @@ const CollectionsOverviewContainer = compose(
 export default CollectionsOverviewContainer;
 
 
-// Updated the below with compose to easier readability which evaluates from right to left. 
+// Updated the below with compose for easier readability which evaluates from right to left. 
 // connect(mapStateToProps)(WithSpinner(CollectionsOverview))

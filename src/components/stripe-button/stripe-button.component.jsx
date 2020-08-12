@@ -2,7 +2,7 @@ import React from 'react';
 import StripeCheckout from 'react-stripe-checkout';
 
 const StripeCheckoutButton = ({ price }) => {
-    // stripe wants all payments to be in cents. So we convert our USD to cents by a simple * 100. 
+    // stripe wants all payments to be in cents. I have to convert USD to cents by a simple * 100. 
     const priceForStripe = price * 100;
     const publishableKey = 'pk_test_pf6Q8SYdczif8xQ9MZkZw5p300dJEEkIPs';
 

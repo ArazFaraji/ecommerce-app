@@ -16,10 +16,5 @@ const HomePage = () => (
 
 // Changing application to use styled-components instead of SCSS so that they are truly individual components and their styles don't bleed to other components. 
 
-// const HomePage = () => (
-//     <div className='homepage'>
-//         <Directory />
-//     </div>
-// );
 
 export default HomePage;

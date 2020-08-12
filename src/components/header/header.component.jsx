@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Link } from 'react-router-dom';
-// Connect is a higher order component that lets us modify our component to have access to things related to Redux. 
+// Connect is a higher order component that lets you modify your component to have access to things related to Redux. 
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -47,19 +47,14 @@ const Header = ({ currentUser, hidden, signOutStart }) => (
     </HeaderContainer>
 )
 
-// // const mapStateToProps = state => ({     in the below line we take this existing line, destructure it with nested values. Such as 'currentUser' is being destructured from 'user' which is being destructured from state. 
-// const mapStateToProps = ({user: { currentUser }, cart: { hidden }}) => ({
-// //     currentUser: state.user.currentUser     ----now that new destructured values are in this function we can change this line to the following
-//     currentUser,
-//     hidden
-// });
 
 
-// // This would be another way to write the code to get state from the selector. But we can further simplify by using createStructuredSelector that we imported already. 
 // const mapStateToProps = state => ({
 //     currentUser: selectCurrentUser(state),
 //     hidden: selectCartHidden(state)
 // });
+
+//Refactored the above code after adding in createStructuredSelector for further simplification. 
 
 const mapStateToProps = createStructuredSelector({
     currentUser: selectCurrentUser,
