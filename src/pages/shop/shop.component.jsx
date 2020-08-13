@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -9,15 +9,12 @@ import CollectionPageContainer from '../collection/collection.container';
 
 // ShopPage component in App.js, ShopPage is nested in a Route. Route automatically passes match, location, and history as props into the component. 
 
-class ShopPage extends React.Component {
-    componentDidMount() {
-        const { fetchCollectionsStart } = this.props;
 
+// Refactored ShopPage to be a functional component and use useEffect for component lifecycle. 
+const ShopPage = ({ fetchCollectionsStart, match}) => {
+    useEffect(() => {
         fetchCollectionsStart();
-    }
-
-    render() {
-        const { match } = this.props;
+    }, [fetchCollectionsStart]);
         
         return (
             <div className="shop-page">
@@ -32,8 +29,35 @@ class ShopPage extends React.Component {
                 />
             </div>
         );
-    }
 }
+
+
+
+// class ShopPage extends React.Component {
+//     componentDidMount() {
+//         const { fetchCollectionsStart } = this.props;
+
+//         fetchCollectionsStart();
+//     }
+
+//     render() {
+//         const { match } = this.props;
+        
+//         return (
+//             <div className="shop-page">
+//                 <Route 
+//                     exact 
+//                     path={`${match.path}`} 
+//                     component={ CollectionsOverviewContainer }
+//                 />
+//                 <Route 
+//                     path={`${match.path}/:collectionID`} 
+//                     component={ CollectionPageContainer }
+//                 />
+//             </div>
+//         );
+//     }
+// }
 
 const mapDispatchToProps = dispatch => ({
     fetchCollectionsStart: () => dispatch(fetchCollectionsStart())

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect'
@@ -16,24 +16,31 @@ import { checkUserSession } from './redux/user/user.actions';
 
 
 
-class App extends React.Component {
+const App = ({ checkUserSession, currentUser }) => {
 
-  unsubscribeFromAuth = null
+  // unsubscribeFromAuth = null
 
 
   // Below checks the status of a signed in user via Google when component mounts. When they log in, updates state of currentUser.
-  componentDidMount() {
-    const { checkUserSession } = this.props;
-    checkUserSession();
-  };
+  // componentDidMount() {
+  //   const { checkUserSession } = this.props;
+  //   checkUserSession();
+  // };
+
+
+  // Brought in useEffect, passing in checkUserSession as a dependency as its passed in as props with mapStateToProps and will prevent it from firing off again (re-rendering) once a user logs in. 
+  useEffect(() => {
+    checkUserSession()
+  }, [checkUserSession]);
+
+
 
   // This prevents a memory leak by making sure when this component is ummounted the user is logged off. 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  };
+  // componentWillUnmount() {
+  //   this.unsubscribeFromAuth();
+  // };
 
 
-  render() {
     return (
       <div>
         <Header />
@@ -45,7 +52,7 @@ class App extends React.Component {
             exact 
             path='/signin' 
             render={() => 
-              this.props.currentUser ? (
+              currentUser ? (
                 <Redirect to='/' />
               ) : (
                 <SignInAndSignUpPage />
@@ -55,7 +62,6 @@ class App extends React.Component {
         </Switch>
       </div>
     );
-  }
 }
 
 // const mapStatetoProps = ({ user }) => ({

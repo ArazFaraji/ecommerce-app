@@ -44,7 +44,7 @@ const CollectionPage = ({ collection }) => {
 // };
 
 
-// There are two parameters in mapStateToProps. 1st parameter is always the state from the reducer. The second property has a naming convention of ownProps which are the props of the component we are wrapping in {connect}. This passes on the match props which I need in the shop selector to find exactly which collection the user wants displayed. That state that is displayed depends on the URL parameter. 
+// There are two parameters in mapStateToProps. 1st parameter is always the state from the reducer. The second param has a naming convention of ownProps which are the props of the component we are wrapping in {connect}. This passes on the match props which I need in the shop selector to find exactly which collection the user wants displayed. That state that is displayed depends on the URL parameter. 
 const mapStateToProps = (state, ownProps) => ({
     collection: selectCollection(ownProps.match.params.collectionID)(state)
 })
