@@ -18,8 +18,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     const userRef = firestore.doc(`users/${userAuth.uid}`);
     const snapShot = await userRef.get();
-    
-    // Below line checks to see if snapSHot is FALSE(user does not have existing data in our db). If FALSE then it creates a user in our DB with the specified fields of data.
+    // Below line checks to see if snapSHot is FALSE(user does not have existing data in db). If FALSE then it creates a user in the DB with the specified fields of data.
 
     if(!snapShot.exists) {
         const { displayName, email } = userAuth;
@@ -62,7 +61,7 @@ export const convertCollectionsSnapshotToMap = collections => {
         const { title, items } = doc.data();
 
         return {
-            // encodeURI lets you pass it a string and it gives back a string where any characters that a URL cannot handle/process are converted into a version that the URL can read
+            // encodeURI lets me pass it a string and it gives back a string where any characters that a URL cannot handle/process are converted into a version that the URL can read
             routeName: encodeURI(title.toLowerCase()),
             id: doc.id,
             title, 
@@ -71,7 +70,7 @@ export const convertCollectionsSnapshotToMap = collections => {
     });
     console.log(transformedCollection);
     
-    // We pass in initial object {}, goes through and sets the title of each collection as a key and they equal their respective collection object. 
+    // I pass in initial object {}, goes through and sets the title of each collection as a key and they equal their respective collection object. 
     return transformedCollection.reduce((accumulator, collection) => {
         accumulator[collection.title.toLowerCase()] = collection;
         return accumulator;

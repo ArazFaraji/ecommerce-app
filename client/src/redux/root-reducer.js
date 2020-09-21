@@ -2,7 +2,7 @@
 
 import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
-// The below import lets us use local storage on the browser. 
+// The below import lets you use local storage on the browser. 
 import storage from 'redux-persist/lib/storage';
 
 import userReducer from './user/user.reducer';
@@ -13,12 +13,12 @@ import shopReducer from './shop/shop.reducer';
 const persistConfig = {
     key: 'root',
     storage, 
-    // whitelist is a property that is an array that contains the string names of any of the reducers we want to persist through our app. In our current app our user is being handled by Firebase authentication so we do not need to persist it. 
+    // whitelist is a property that is an array that contains the string names of any of the reducers you want to persist through the app. In this current app the user is being handled by Firebase authentication so I do not need to persist it. 
     whitelist: ['cart']
 }
 
 
-// We now have to create a variable based on our previous export (commented out below) so we can wrap the rootReducer into the persistReducer with its configuration. 
+// I now create a variable based on the previous export so I can wrap the rootReducer into the persistReducer with its configuration. 
 const rootReducer = combineReducers({
     user: userReducer,
     cart: cartReducer,
@@ -28,11 +28,3 @@ const rootReducer = combineReducers({
 
 export default persistReducer(persistConfig, rootReducer);
 
-
-
-
-
-// export default combineReducers({
-//     user: userReducer,
-//     cart: cartReducer
-// });

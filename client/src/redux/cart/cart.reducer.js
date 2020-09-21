@@ -29,7 +29,7 @@ const cartReducer = (state = INITIAL_STATE, action) => {
         case CartActionTypes.CLEAR_ITEM_FROM_CART:
             return {
                 ...state,
-                // Filter is being used to say if the cartItem id does not match the action payload id (the item we are trying to remove) then we want to keep it (return true). But if the cartItem.id does match the action.payload.id then we want to filter it out (return false). Filter returns us back anything that yields true in new array. 
+                // Filter is being used to say if the cartItem id does not match the action payload id (the item being removed) then you want to keep it (return true). But if the cartItem.id does match the action.payload.id then you want to filter it out (return false). Filter returns back anything that yields true in new array. 
                 cartItems: state.cartItems.filter(cartItem => cartItem.id !== action.payload.id)
             };
         case CartActionTypes.CLEAR_CART:
