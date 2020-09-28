@@ -58,4 +58,4 @@ export const CustomButtonContainer = styled.button`
     justify-content: center;
 
     ${getButtonStyles}
-`
+`;
